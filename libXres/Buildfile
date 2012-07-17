@@ -1,0 +1,24 @@
+# Description: X Resource extension client library
+# URL: http://xorg.freedesktop.org
+
+name=libXres
+version=1.0.6
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
+depends=(libX11 libXext resourceproto)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --enable-malloc0returnsnull
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
+                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}

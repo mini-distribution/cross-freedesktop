@@ -1,0 +1,18 @@
+# Description: X.Org xf86bigfontproto
+# URL: http://xorg.freedesktop.org
+
+name=xf86bigfontproto
+version=1.2.0
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/proto/$name-$version.tar.bz2)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+}

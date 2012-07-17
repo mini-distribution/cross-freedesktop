@@ -1,0 +1,20 @@
+# Description: X.Org scrnsaverproto
+# URL: http://xorg.freedesktop.org
+
+name=scrnsaverproto
+version=1.2.2
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/proto/$name-$version.tar.bz2)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share/doc
+}

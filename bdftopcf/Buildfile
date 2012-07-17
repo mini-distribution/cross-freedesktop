@@ -1,0 +1,19 @@
+# Description: BDF to PCF font file converter
+# URL: http://xorg.freedesktop.org
+
+name=bdftopcf
+version=1.0.3
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/app/$name-$version.tar.bz2)
+depends=libXfont
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+}

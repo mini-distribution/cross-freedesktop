@@ -1,0 +1,63 @@
+# Description: X Window System server
+# URL: http://xorg.freedesktop.org
+
+name=xorg-server
+version=1.12.99.901
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/xserver/$name-$version.tar.bz2)
+depends=(bdftopcf
+         mkfontdir
+         mkfontscale
+         libxkbui
+         xcmiscproto
+         scrnsaverproto
+         bigreqsproto
+         damageproto
+         videoproto
+         xf86vidmodeproto
+         libXtst
+         libXxf86misc
+         libXaw
+         libXi
+         libXres
+         libXrandr
+         libXft
+         libXcursor
+         libXxf86dga
+         pixman
+         libpciaccess
+         openssl)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --localstatedir=/var \
+               --enable-xdmcp \
+               --enable-dga \
+               --enable-xf86vidmode \
+               --enable-xf86bigfont \
+               --disable-dri \
+               --disable-dri2 \
+               --disable-glx \
+               --disable-xaa \
+               --disable-vgahw \
+               --disable-vbe \
+               --disable-xinerama \
+               --disable-composite \
+               --disable-xvmc \
+               --disable-shave \
+               --disable-int10-module \
+               --with-xkb-output=/var/lib/xkb
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rmdir $PKG/var/log
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
+                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}

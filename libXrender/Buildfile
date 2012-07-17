@@ -1,0 +1,26 @@
+# Description: X Render extension client library
+# URL: http://xorg.freedesktop.org
+
+name=libXrender
+version=0.9.7
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
+depends=(libX11 renderproto)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --enable-malloc0returnsnull
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
+                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}

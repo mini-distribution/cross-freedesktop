@@ -1,0 +1,32 @@
+# Description: XCB library
+# URL: http://xcb.freedesktop.org
+
+name=libxcb
+version=1.8.1
+release=1
+source=(http://xcb.freedesktop.org/dist/$name-$version.tar.bz2)
+depends=(xcb-proto libXdmcp libXau libxslt libpthread-stubs)
+
+build() {
+   cd $name-$version
+
+   sed -i configure \
+       -e "s|XCBPROTO_XCBINCLUDEDIR=.*|XCBPROTO_XCBINCLUDEDIR=$SYSROOT/usr/share/xcb|" \
+       -e "s|XCBPROTO_XCBPYTHONDIR=.*|XCBPROTO_XCBPYTHONDIR=$SYSROOT/usr/lib/python2.7/dist-packages|"
+
+   echo "ac_cv_path_XSLTPROC=/usr/bin/xsltproc" > config.cache
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --cache-file=config.cache
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share/doc
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \;
+   find $PKG -name "*.la" -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}

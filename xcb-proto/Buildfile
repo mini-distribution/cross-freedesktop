@@ -1,0 +1,23 @@
+# Description: XCB X protocol descriptions
+# URL: http://xcb.freedesktop.org
+
+name=xcb-proto
+version=1.7.1
+release=1
+source=(http://xcb.freedesktop.org/dist/$name-$version.tar.bz2)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+}
+
+check() {
+   # Test for preinstalled tools
+   check_tool python
+}

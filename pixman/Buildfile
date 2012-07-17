@@ -1,0 +1,22 @@
+# Description: Pixel manipulation library
+# URL: http://xorg.freedesktop.org
+
+name=pixman
+version=0.26.2
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
+                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}

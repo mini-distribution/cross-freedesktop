@@ -1,0 +1,23 @@
+# Description: X.Org libXfont
+# URL: http://xorg.freedesktop.org
+
+name=libXfont
+version=1.4.5
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
+depends=(freetype xproto xtrans fontsproto libfontenc)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \;
+   find $PKG -name "*.la" -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}

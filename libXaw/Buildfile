@@ -1,0 +1,25 @@
+# Description: X Athena Widgets toolkit
+# URL: http://xorg.freedesktop.org
+
+name=libXaw
+version=1.0.11
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
+depends=(xproto libX11 xextproto libXext libXt libXmu libXpm)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share/doc
+
+   # Fix .la files
+   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
+                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+}
