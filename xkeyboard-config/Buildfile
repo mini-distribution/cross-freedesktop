@@ -1,0 +1,29 @@
+# Description: X keyboard configuration database
+# URL: http://www.freedesktop.org/wiki/Software_2fXKeyboardConfig
+
+name=xkeyboard-config
+version=2.0
+release=1
+source=(http://xlibs.freedesktop.org/xkbdesc/$name-$version.tar.bz2)
+depends=xkbcomp
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --with-xkb-base=/usr/share/X11/xkb \
+               --with-xkb-rules-symlink=xorg
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   rm -r $PKG/usr/share/locale
+   ln -s /var/lib/xkb $PKG/usr/share/X11/xkb/compiled
+}
+
+check() {
+   # Test for preinstalled tools
+   check_tool xkbcomp
+}

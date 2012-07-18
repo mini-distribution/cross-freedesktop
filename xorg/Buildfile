@@ -1,0 +1,7 @@
+# Description: X.Org's implementation of X11
+# URL: http://xorg.freedesktop.org
+depends=(xorg-server xf86-input-mouse xf86-input-keyboard xf86-input-evdev xf86-video-fbdev xinit xauth rgb xkeyboard-config)
+
+name=xorg
+version=7.7
+release=1
