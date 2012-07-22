@@ -57,7 +57,6 @@ build() {
 
    rmdir $PKG/var/log
 
-   # Fix .la files
-   find $PKG -name "*.la" -exec sed -i -e "/dependency_libs/s; /usr; $SYSROOT/usr;g" {} \; \
-                          -exec sed -i -e "/libdir/s;'/usr;'$SYSROOT/usr;g" {} \;
+   # Fix libtool files
+   fix_la_files $PKG
 }
