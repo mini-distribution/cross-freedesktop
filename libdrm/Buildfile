@@ -1,0 +1,27 @@
+# Description: Direct Rendering Manager library
+# URL: http://dri.freedesktop.org
+
+name=libdrm
+version=2.4.37
+release=1
+source=(http://dri.freedesktop.org/libdrm/$name-$version.tar.gz)
+depends=(libpthread-stubs systemd)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr \
+               --enable-udev \
+               --enable-omap-experimental-api \
+               --disable-intel \
+               --disable-nouveau \
+               --disable-radeon
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix .la files
+   fix_la_files $PKG
+}

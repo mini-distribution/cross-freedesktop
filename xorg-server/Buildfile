@@ -24,6 +24,7 @@ depends=(bdftopcf
          libXft
          libXcursor
          libXxf86dga
+         libdrm
          pixman
          libpciaccess
          openssl)
@@ -39,16 +40,15 @@ build() {
                --enable-dga \
                --enable-xf86vidmode \
                --enable-xf86bigfont \
+               --enable-libdrm \
                --disable-dri \
                --disable-dri2 \
                --disable-glx \
-               --disable-xaa \
                --disable-vgahw \
                --disable-vbe \
                --disable-xinerama \
                --disable-composite \
                --disable-xvmc \
-               --disable-shave \
                --disable-int10-module \
                --with-xkb-output=/var/lib/xkb
 
