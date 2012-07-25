@@ -18,7 +18,8 @@ depends=(xorg-server
          rgb
          sed
          font-bh-type1
-         font-bh-ttf)
+         font-bh-ttf
+         font-ms-ttf)
 
 name=xorg
 version=7.7
