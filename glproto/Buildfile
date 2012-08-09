@@ -1,0 +1,18 @@
+# Description: X.Org glproto
+# URL: http://xorg.freedesktop.org
+
+name=glproto
+version=1.4.16
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/proto/$name-$version.tar.bz2)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+}
