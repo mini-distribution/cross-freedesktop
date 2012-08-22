@@ -12,6 +12,7 @@ depends=(xorg-server
          xclock
          xinput
          xset
+         xdpyinfo
          xrandr
          xrdb
          twm
