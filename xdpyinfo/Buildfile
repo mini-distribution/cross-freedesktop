@@ -1,0 +1,19 @@
+# Description: X.Org xdpyinfo application
+# URL: http://xorg.freedesktop.org
+
+name=xdpyinfo
+version=1.3.0
+release=1
+source=(http://xorg.freedesktop.org/releases/individual/app/$name-$version.tar.bz2)
+depends=(libXext libXtst)
+
+build() {
+   cd $name-$version
+
+   ./configure --build=$BUILD \
+               --host=$HOST \
+               --prefix=/usr
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+}
