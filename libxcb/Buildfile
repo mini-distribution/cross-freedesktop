@@ -2,7 +2,7 @@
 # URL: http://xcb.freedesktop.org
 
 name=libxcb
-version=1.8.1
+version=1.9
 release=1
 source=(http://xcb.freedesktop.org/dist/$name-$version.tar.bz2)
 depends=(xcb-proto libXdmcp libXau libxslt libpthread-stubs)
