@@ -2,7 +2,7 @@
 # URL: http://xcb.freedesktop.org
 
 name=xcb-proto
-version=1.7.1
+version=1.8
 release=1
 source=(http://xcb.freedesktop.org/dist/$name-$version.tar.bz2)
 
