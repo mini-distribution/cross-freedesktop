@@ -27,7 +27,7 @@ drwxr-xr-x	root/root	usr/share/X11/xkb/compat/
 -rw-r--r--	root/root	usr/share/X11/xkb/compat/README
 -rw-r--r--	root/root	usr/share/X11/xkb/compat/xfree86
 -rw-r--r--	root/root	usr/share/X11/xkb/compat/xtest
-lrwxrwxrwx	root/root	usr/share/X11/xkb/compiled
+lrwxrwxrwx	root/root	usr/share/X11/xkb/compiled -> /var/lib/xkb
 drwxr-xr-x	root/root	usr/share/X11/xkb/geometry/
 -rw-r--r--	root/root	usr/share/X11/xkb/geometry/amiga
 -rw-r--r--	root/root	usr/share/X11/xkb/geometry/ataritt
@@ -142,9 +142,9 @@ drwxr-xr-x	root/root	usr/share/X11/xkb/rules/
 -rw-r--r--	root/root	usr/share/X11/xkb/rules/README
 -rw-r--r--	root/root	usr/share/X11/xkb/rules/xfree98
 -rw-r--r--	root/root	usr/share/X11/xkb/rules/xkb.dtd
-lrwxrwxrwx	root/root	usr/share/X11/xkb/rules/xorg
-lrwxrwxrwx	root/root	usr/share/X11/xkb/rules/xorg.lst
-lrwxrwxrwx	root/root	usr/share/X11/xkb/rules/xorg.xml
+lrwxrwxrwx	root/root	usr/share/X11/xkb/rules/xorg -> base
+lrwxrwxrwx	root/root	usr/share/X11/xkb/rules/xorg.lst -> base.lst
+lrwxrwxrwx	root/root	usr/share/X11/xkb/rules/xorg.xml -> base.xml
 drwxr-xr-x	root/root	usr/share/X11/xkb/semantics/
 -rw-r--r--	root/root	usr/share/X11/xkb/semantics/basic
 -rw-r--r--	root/root	usr/share/X11/xkb/semantics/complete

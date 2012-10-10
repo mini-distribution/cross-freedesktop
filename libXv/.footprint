@@ -6,9 +6,9 @@ drwxr-xr-x	root/root	usr/include/X11/extensions/
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libXv.a
 -rwxr-xr-x	root/root	usr/lib/libXv.la
-lrwxrwxrwx	root/root	usr/lib/libXv.so
-lrwxrwxrwx	root/root	usr/lib/libXv.so.1
 -rwxr-xr-x	root/root	usr/lib/libXv.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/libXv.so.1 -> libXv.so.1.0.0
+lrwxrwxrwx	root/root	usr/lib/libXv.so -> libXv.so.1.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/xv.pc
 drwxr-xr-x	root/root	usr/share/

@@ -5,9 +5,9 @@ drwxr-xr-x	root/root	usr/include/X11/
 drwxr-xr-x	root/root	usr/lib/
 -rw-r--r--	root/root	usr/lib/libXau.a
 -rwxr-xr-x	root/root	usr/lib/libXau.la
-lrwxrwxrwx	root/root	usr/lib/libXau.so
-lrwxrwxrwx	root/root	usr/lib/libXau.so.6
 -rwxr-xr-x	root/root	usr/lib/libXau.so.6.0.0
+lrwxrwxrwx	root/root	usr/lib/libXau.so.6 -> libXau.so.6.0.0
+lrwxrwxrwx	root/root	usr/lib/libXau.so -> libXau.so.6.0.0
 drwxr-xr-x	root/root	usr/lib/pkgconfig/
 -rw-r--r--	root/root	usr/lib/pkgconfig/xau.pc
 drwxr-xr-x	root/root	usr/share/
