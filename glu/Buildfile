@@ -1,0 +1,21 @@
+# Description: Describe the build here
+# URL: http://www.something.com
+
+name=glu
+version=9.0.0
+release=1
+source=ftp://ftp.freedesktop.org/pub/mesa/$name/$name-$version.tar.bz2
+depends=(MesaLib)
+
+build() {
+   cd $name-$version
+
+   ./configure --prefix=/usr  \
+               --build=$BUILD \
+               --host=$HOST
+
+   make -j$JOBS
+   make DESTDIR=$PKG install
+
+   fix_la_files $PKG
+}
