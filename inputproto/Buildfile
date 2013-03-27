@@ -2,7 +2,7 @@
 # URL: http://xorg.freedesktop.org
 
 name=inputproto
-version=2.2
+version=2.3
 release=1
 source=(http://xorg.freedesktop.org/releases/individual/proto/$name-$version.tar.bz2)
 
@@ -16,5 +16,4 @@ build() {
    make -j $JOBS
    make DESTDIR=$PKG install
 
-   rm -r $PKG/usr/share/doc
 }
