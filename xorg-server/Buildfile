@@ -2,9 +2,10 @@
 # URL: http://xorg.freedesktop.org
 
 name=xorg-server
-version=1.12.99.901
+version=1.14.0
 release=1
-source=(http://xorg.freedesktop.org/releases/individual/xserver/$name-$version.tar.bz2)
+source=(http://xorg.freedesktop.org/releases/individual/xserver/$name-$version.tar.bz2
+        xfixes-ifdef-PanoramiXFixes-62015.patch)
 depends=(bdftopcf
          mkfontdir
          mkfontscale
@@ -31,6 +32,8 @@ depends=(bdftopcf
 
 build() {
    cd $name-$version
+
+   patch -p1 < $SRC/xfixes-ifdef-PanoramiXFixes-62015.patch
 
    ./configure --build=$BUILD \
                --host=$HOST \

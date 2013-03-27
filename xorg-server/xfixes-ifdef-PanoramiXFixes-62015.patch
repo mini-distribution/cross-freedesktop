@@ -1,0 +1,15 @@
+diff --git a/xfixes/xfixesint.h b/xfixes/xfixesint.h
+index 334c71f..44e8890 100644
+--- a/xfixes/xfixesint.h
++++ b/xfixes/xfixesint.h
+@@ -291,8 +291,10 @@ int
+  SProcXFixesDestroyPointerBarrier(ClientPtr client);
+ 
+ /* Xinerama */
++#ifdef PANORAMIX
+ extern int (*PanoramiXSaveXFixesVector[XFixesNumberRequests]) (ClientPtr);
+ void PanoramiXFixesInit(void);
+ void PanoramiXFixesReset(void);
++#endif
+ 
+ #endif                          /* _XFIXESINT_H_ */
