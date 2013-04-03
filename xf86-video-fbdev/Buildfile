@@ -4,11 +4,14 @@
 name=xf86-video-fbdev
 version=0.4.3
 release=1
-source=(http://xorg.freedesktop.org/releases/individual/driver/$name-$version.tar.bz2)
+source=(http://xorg.freedesktop.org/releases/individual/driver/$name-$version.tar.bz2
+        remove-mibstore-h.patch)
 depends=xorg-server
 
 build() {
    cd $name-$version
+
+   patch -p1 < $SRC/remove-mibstore-h.patch
 
    ./configure --build=$BUILD \
                --host=$HOST \
