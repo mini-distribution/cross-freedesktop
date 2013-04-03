@@ -17,3 +17,7 @@ build() {
 
 	rm $PKG/usr/share/fonts/X11/Type1/fonts.{dir,scale}
 }
+
+check() {
+   check_tool mkfontdir "Can be found in the Ubuntu 12.10 repositories in the package xfonts-utils"
+}
