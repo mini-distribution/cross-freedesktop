@@ -25,5 +25,5 @@ build() {
 
 check() {
    # Test for preinstalled tools
-   check_tool xkbcomp
+   check_tool xkbcomp "Can be found in the Ubuntu 12.10 repositories in the package x11-xkb-utils"
 }
