@@ -2,7 +2,7 @@
 # URL: http://xorg.freedesktop.org
 
 name=libXrender
-version=0.9.7
+version=0.9.8
 release=1
 source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
 depends=(libX11 renderproto)
