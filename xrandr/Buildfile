@@ -2,7 +2,7 @@
 # URL: http://xorg.freedesktop.org
 
 name=xrandr
-version=1.4.0
+version=1.4.1
 release=1
 source=(http://xorg.freedesktop.org/releases/individual/app/$name-$version.tar.bz2)
 depends=(libX11 libXrandr)
