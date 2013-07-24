@@ -2,7 +2,7 @@
 # URL: http://xorg.freedesktop.org
 
 name=libXfont
-version=1.4.5
+version=1.4.6
 release=1
 source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
 depends=(freetype xproto xtrans fontsproto libfontenc)
