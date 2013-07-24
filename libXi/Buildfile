@@ -2,10 +2,10 @@
 # URL: http://xorg.freedesktop.org
 
 name=libXi
-version=1.7
+version=1.7.2
 release=1
 source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
-depends=(libX11 libXext)
+depends=(libX11 libXext libXfixes)
 
 build() {
    cd $name-$version
