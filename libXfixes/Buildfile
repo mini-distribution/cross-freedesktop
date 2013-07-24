@@ -2,7 +2,7 @@
 # URL: http://xorg.freedesktop.org
 
 name=libXfixes
-version=5.0
+version=5.0.1
 release=1
 source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
 depends=(libX11 xproto fixesproto xextproto)
