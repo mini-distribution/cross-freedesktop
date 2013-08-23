@@ -2,7 +2,7 @@
 # URL: http://xorg.freedesktop.org
 
 name=pixman
-version=0.30.0
+version=0.30.2
 release=1
 source=(http://xorg.freedesktop.org/releases/individual/lib/$name-$version.tar.bz2)
 
