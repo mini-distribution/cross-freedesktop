@@ -2,7 +2,7 @@
 # URL: http://xorg.freedesktop.org
 
 name=xclock
-version=1.0.6
+version=1.0.7
 release=1
 source=(http://xorg.freedesktop.org/releases/individual/app/$name-$version.tar.bz2)
 depends=(libX11 libXaw libXmu libXrender libXft libxkbfile)
