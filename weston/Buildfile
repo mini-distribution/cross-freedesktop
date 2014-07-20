@@ -1,0 +1,55 @@
+# Description: A reference wayland compositor
+# URL: http://wayland.freedesktop.org
+
+name=weston
+version=1.5.0
+release=1
+source=(http://wayland.freedesktop.org/releases/$name-$version.tar.xz
+        disable-wayland-scanner-pkg-check.patch)
+depends=(libinput wayland pixman libxkbcommon libpng libjpeg cairo)
+
+build() {
+    cd $name-$version
+
+    patch -p1 < $SRC/disable-wayland-scanner-pkg-check.patch
+
+    autoreconf --install
+
+    ./configure --build=$BUILD \
+                --host=$HOST \
+                --prefix=/usr \
+                --disable-egl \
+                --disable-static \
+                --enable-xkbcommon \
+                --enable-setuid-install \
+                --disable-xwayland \
+                --disable-xwayland-test \
+                --disable-x11-compositor \
+                --disable-drm-compositor \
+                --disable-libinput-backend \
+                --disable-wayland-compositor \
+                --disable-headless-compositor \
+                --disable-rpi-compositor \
+                --enable-fbdev-compositor \
+                --disable-rdp-compositor \
+                --enable-screen-sharing \
+                --disable-vaapi-recorder \
+                --enable-simple-clients \
+                --disable-simple-egl-clients \
+                --enable-clients \
+                --disable-resize-optimization \
+                --disable-weston-launch \
+                --disable-fullscreen-shell \
+                --disable-colord \
+                --disable-dbus \
+                --disable-wcap-tools \
+                --disable-libunwind \
+                WESTON_NATIVE_BACKEND="fbdev-backend.so"
+#                --enable-demo-clients-install
+
+   make -j $JOBS
+   make DESTDIR=$PKG install
+
+   # Fix libtool files
+   fix_la_files $PKG
+}
