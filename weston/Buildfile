@@ -44,8 +44,8 @@ build() {
                 --disable-dbus \
                 --disable-wcap-tools \
                 --disable-libunwind \
+                --enable-demo-clients-install \
                 WESTON_NATIVE_BACKEND="fbdev-backend.so"
-#                --enable-demo-clients-install
 
    make -j $JOBS
    make DESTDIR=$PKG install
