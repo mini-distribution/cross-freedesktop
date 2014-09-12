@@ -1,11 +1,11 @@
 # Description: X keyboard configuration database
-# URL: http://www.freedesktop.org/wiki/Software_2fXKeyboardConfig
+# URL: http://www.freedesktop.org/wiki/Software/XKeyboardConfig
+# License: MIT
 
 name=xkeyboard-config
-version=2.0
+version=2.12
 release=1
-source=(http://xlibs.freedesktop.org/xkbdesc/$name-$version.tar.bz2)
-depends=xkbcomp
+source=(http://xorg.freedesktop.org/archive/individual/data/xkeyboard-config/$name-$version.tar.bz2)
 
 build() {
    cd $name-$version
@@ -13,17 +13,16 @@ build() {
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               --with-xkb-base=/usr/share/X11/xkb \
-               --with-xkb-rules-symlink=xorg
+               --with-xkb-rules-symlink=xorg \
+               --disable-runtime-deps
 
    make -j $JOBS
    make DESTDIR=$PKG install
 
    rm -r $PKG/usr/share/locale
-   ln -s /var/lib/xkb $PKG/usr/share/X11/xkb/compiled
 }
 
 check() {
    # Test for preinstalled tools
-   check_tool xkbcomp "Can be found in the Ubuntu 12.10 repositories in the package x11-xkb-utils"
+   check_tool xkbcomp "Can be found in Ubuntu package x11-xkb-utils"
 }
