@@ -2,11 +2,11 @@
 # URL: http://wayland.freedesktop.org
 
 name=weston
-version=1.5.0
+version=1.5.93
 release=1
 source=(http://wayland.freedesktop.org/releases/$name-$version.tar.xz
         disable-wayland-scanner-pkg-check.patch)
-depends=(libinput wayland pixman libxkbcommon libpng libjpeg cairo)
+depends=(wayland pixman libxkbcommon libinput libpng libjpeg cairo linux-pam)
 
 build() {
     cd $name-$version
@@ -21,25 +21,25 @@ build() {
                 --disable-egl \
                 --disable-static \
                 --enable-xkbcommon \
+                --enable-libinput-backend \
                 --enable-setuid-install \
                 --disable-xwayland \
                 --disable-xwayland-test \
                 --disable-x11-compositor \
                 --disable-drm-compositor \
-                --disable-libinput-backend \
                 --disable-wayland-compositor \
                 --disable-headless-compositor \
                 --disable-rpi-compositor \
-                --enable-fbdev-compositor \
                 --disable-rdp-compositor \
-                --enable-screen-sharing \
+                --enable-fbdev-compositor \
+                --disable-screen-sharing \
                 --disable-vaapi-recorder \
-                --enable-simple-clients \
                 --disable-simple-egl-clients \
-                --enable-clients \
                 --disable-resize-optimization \
-                --disable-weston-launch \
-                --disable-fullscreen-shell \
+                --enable-weston-launch \
+                --enable-clients \
+                --enable-simple-clients \
+                --enable-fullscreen-shell \
                 --disable-colord \
                 --disable-dbus \
                 --disable-wcap-tools \
