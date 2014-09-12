@@ -1,26 +1,27 @@
 # Description: The Mesa 3D Graphics Library
 # URL: http://www.mesa3d.org
+# License: Mesa MIT Khronos
 
 name=MesaLib
-version=9.2.2
+version=10.2.7
 release=1
-source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.bz2
-        fix-builtin-linking.patch)
-depends=(libX11 xextproto libXext glproto libdrm dri2proto
-         libXdamage libXfixes)
+source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.bz2)
+depends=(libdrm)
 
 build() {
    cd Mesa-$version
 
-   patch -p1 < $SRC/fix-builtin-linking.patch
-
-   NOCONFIGURE=1 ./autogen.sh
-
    ./configure --build=$BUILD \
                --host=$HOST \
                --prefix=/usr \
-               --with-dri-drivers=swrast \
-               --with-gallium-drivers=swrast
+               --enable-gles1 \
+               --enable-gles2 \
+               --enable-egl \
+               --enable-gallium-egl \
+               --disable-glx \
+               --disable-dri \
+               --with-gallium-drivers=swrast \
+               --with-egl-platforms=fbdev
 
    make -j $JOBS
    make DESTDIR=$PKG install
@@ -35,5 +36,4 @@ check() {
    check_tool autoreconf
    check_tool automake
    check_tool aclocal
-   check_exist /usr/share/pyshared/libxml2.py "Available in Ubuntu package python-libxml2"
 }
