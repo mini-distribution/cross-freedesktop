@@ -6,7 +6,7 @@ version=1.5.93
 release=1
 source=(http://wayland.freedesktop.org/releases/$name-$version.tar.xz
         disable-wayland-scanner-pkg-check.patch)
-depends=(wayland pixman libxkbcommon libinput libpng libjpeg cairo linux-pam)
+depends=(wayland pixman libxkbcommon libinput libpng libjpeg cairo linux-pam libunwind dbus)
 
 build() {
     cd $name-$version
@@ -18,8 +18,8 @@ build() {
     ./configure --build=$BUILD \
                 --host=$HOST \
                 --prefix=/usr \
-                --disable-egl \
                 --disable-static \
+                --disable-egl \
                 --enable-xkbcommon \
                 --enable-libinput-backend \
                 --enable-setuid-install \
@@ -32,23 +32,36 @@ build() {
                 --disable-rpi-compositor \
                 --disable-rdp-compositor \
                 --enable-fbdev-compositor \
-                --disable-screen-sharing \
+                --enable-screen-sharing \
                 --disable-vaapi-recorder \
                 --disable-simple-egl-clients \
-                --disable-resize-optimization \
+                --with-cairo=image \
+                --without-cairo-glesv2 \
+                --enable-resize-optimization \
                 --enable-weston-launch \
                 --enable-clients \
                 --enable-simple-clients \
                 --enable-fullscreen-shell \
                 --disable-colord \
-                --disable-dbus \
-                --disable-wcap-tools \
-                --disable-libunwind \
+                --enable-dbus \
+                --enable-wcap-tools \
+                --enable-libunwind \
                 --enable-demo-clients-install \
                 WESTON_NATIVE_BACKEND="fbdev-backend.so"
 
+   # Note: Colord depends on eudev (old udev) - we don't want to use that in a
+   # systemd system.
+
    make -j $JOBS
    make DESTDIR=$PKG install
+
+   # Add weston runtime directory
+   install -d $PKG/etc/tmpfiles.d
+   echo 'd /run/weston  0700 root root' > $PKG/etc/tmpfiles.d/weston.conf
+
+   # Add weston runtime environment
+   install -d $PKG/etc/profile.d
+   echo 'export XDG_RUNTIME_DIR=/run/weston' > $PKG/etc/profile.d/weston
 
    # Fix libtool files
    fix_la_files $PKG
