@@ -1,5 +1,5 @@
-# Description: Describe the build here
-# URL: http://www.something.com
+# Description: GL Demos
+# URL: ftp://ftp.freedesktop.org/pub/mesa/glu
 
 name=glu
 version=9.0.0
