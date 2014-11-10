@@ -3,9 +3,9 @@
 # License: Mesa MIT Khronos
 
 name=MesaLib
-version=10.3.0
+version=10.3.3
 release=1
-source=(ftp://ftp.freedesktop.org/pub/mesa/10.3/$name-$version.tar.bz2)
+source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.bz2)
 depends=(libdrm)
 
 build() {
