@@ -2,7 +2,7 @@
 # URL: http://wayland.freedesktop.org
 
 name=weston
-version=1.6.0
+version=1.7.0
 release=1
 source=(http://wayland.freedesktop.org/releases/$name-$version.tar.xz
         disable-wayland-scanner-pkg-check.patch)
