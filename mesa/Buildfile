@@ -2,14 +2,14 @@
 # URL: http://www.mesa3d.org
 # License: Mesa MIT Khronos
 
-name=MesaLib
-version=10.3.3
+name=mesa
+version=10.5.3
 release=1
-source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.bz2)
+source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.gz)
 depends=(libdrm)
 
 build() {
-   cd Mesa-$version
+   cd $name-$version
 
    ./configure --build=$BUILD \
                --host=$HOST \
