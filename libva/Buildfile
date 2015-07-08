@@ -2,9 +2,9 @@
 # URL: http://freedesktop.org/wiki/Software/vaapi
 
 name=libva
-version=1.5.1
+version=1.6.0
 release=1
-source=(http://www.freedesktop.org/software/vaapi/releases/libva/$name-$version.tar.bz2)
+source=(http://www.freedesktop.org/software/vaapi/releases/$name/$name-$version.tar.bz2)
 depends=(libdrm)
 
 build() {

@@ -2,7 +2,7 @@
 # URL: http://www.freedesktop.org/wiki/Software/libinput
 
 name=libinput
-version=0.13.0
+version=0.19.0
 release=1
 source=(http://www.freedesktop.org/software/$name/$name-$version.tar.xz)
 depends=(mtdev systemd libevdev)
