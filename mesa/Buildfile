@@ -3,9 +3,9 @@
 # License: Mesa MIT Khronos
 
 name=mesa
-version=10.5.3
+version=10.6.1
 release=1
-source=(ftp://ftp.freedesktop.org/pub/mesa/$version/$name-$version.tar.gz)
+source=(ftp://ftp.freedesktop.org/pub/$name/$version/$name-$version.tar.gz)
 depends=(libdrm)
 
 build() {
@@ -16,12 +16,12 @@ build() {
                --prefix=/usr \
                --enable-gles1 \
                --enable-gles2 \
+               --enable-dri \
                --enable-egl \
                --enable-gallium-egl \
                --disable-glx \
-               --disable-dri \
                --with-gallium-drivers=swrast \
-               --with-egl-platforms=fbdev
+               --with-egl-platforms=drm \
 
    make -j $JOBS
    make DESTDIR=$PKG install
