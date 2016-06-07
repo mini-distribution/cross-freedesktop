@@ -2,18 +2,13 @@
 # URL: http://wayland.freedesktop.org
 
 name=weston
-version=1.7.0
+version=1.11.0
 release=1
-source=(http://wayland.freedesktop.org/releases/$name-$version.tar.xz
-        disable-wayland-scanner-pkg-check.patch)
-depends=(wayland pixman libxkbcommon libinput libpng libjpeg cairo linux-pam libunwind dbus)
+source=(http://wayland.freedesktop.org/releases/$name-$version.tar.xz)
+depends=(wayland pixman libxkbcommon libinput libpng libjpeg cairo linux-pam libunwind dbus wayland-protocols)
 
 build() {
     cd $name-$version
-
-    patch -p1 < $SRC/disable-wayland-scanner-pkg-check.patch
-
-    autoreconf --install
 
     ./configure --build=$BUILD \
                 --host=$HOST \
@@ -21,7 +16,6 @@ build() {
                 --disable-static \
                 --disable-egl \
                 --enable-xkbcommon \
-                --enable-libinput-backend \
                 --enable-setuid-install \
                 --disable-xwayland \
                 --disable-xwayland-test \
@@ -31,6 +25,7 @@ build() {
                 --disable-headless-compositor \
                 --disable-rpi-compositor \
                 --disable-rdp-compositor \
+                --disable-colord \
                 --enable-fbdev-compositor \
                 --enable-screen-sharing \
                 --disable-vaapi-recorder \
@@ -42,17 +37,13 @@ build() {
                 --enable-clients \
                 --enable-simple-clients \
                 --enable-fullscreen-shell \
-                --disable-colord \
                 --enable-dbus \
                 --enable-wcap-tools \
                 --enable-libunwind \
                 --enable-demo-clients-install \
                 WESTON_NATIVE_BACKEND="fbdev-backend.so"
 
-   # Note: Colord depends on eudev (old udev) - we don't want to use that in a
-   # systemd system.
-
-   make -j $JOBS
+   make -j $JOBS WAYLAND_PROTOCOLS_DATADIR=$SYSROOT/usr/share/wayland-protocols
    make DESTDIR=$PKG install
 
    # Add weston runtime directory
