@@ -2,10 +2,10 @@
 # URL: http://wayland.freedesktop.org
 
 name=wayland
-version=1.8.0
+version=1.11.0
 release=1
 source=(http://wayland.freedesktop.org/releases/$name-$version.tar.xz)
-depends=(libffi expat native/wayland)
+depends=(libffi expat libxml2 native/wayland)
 
 build() {
    cd $name-$version
@@ -15,7 +15,7 @@ build() {
                --prefix=/usr \
                --disable-static \
                --disable-documentation \
-               --disable-scanner
+               --with-host-scanner
 
    make -j $JOBS
    make DESTDIR=$PKG install
