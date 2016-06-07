@@ -2,10 +2,10 @@
 # URL: http://freedesktop.org/wiki/Software/vaapi
 
 name=libva-intel-driver
-version=1.6.0
+version=1.7.0
 release=1
 source=(http://www.freedesktop.org/software/vaapi/releases/libva-intel-driver/$name-$version.tar.bz2)
-depends=(libva)
+depends=(libva wayland)
 
 build() {
 
@@ -13,7 +13,10 @@ build() {
 
    ./configure --prefix=/usr  \
                --host=$HOST   \
-               --build=$BUILD
+               --build=$BUILD \
+               --enable-drm \
+               --enable-wayland \
+               --disable-x11
 
    make -j$JOBS
    make DESTDIR=$PKG install
